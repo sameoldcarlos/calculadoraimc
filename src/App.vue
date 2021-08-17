@@ -92,7 +92,7 @@
         {{ textoBotao }}
       </button>
     </div>
-    <span>Desenvolvido com <i class="fas fa-heart"></i> por <a href="github.com/sameoldcarlos">{{author}}</a></span>
+    <span>Desenvolvido com <i class="fas fa-heart"></i> por <a href="https://github.com/sameoldcarlos">{{author}}</a></span>
   </div>
 </template>
 
