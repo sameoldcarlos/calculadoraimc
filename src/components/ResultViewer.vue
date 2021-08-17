@@ -7,12 +7,12 @@
                 <h2>{{imc}}</h2>
             </div>            
         </div>
-        <dv class="dados">
+        <div class="dados">
             <h3>Peso {{peso}}kg</h3>
             <h3>Altura {{altura}}m</h3><br>
             <h3>Seu peso ideal</h3>
             <h3>{{pesoIdeal}}</h3>
-        </dv>
+        </div>
         <div class="detalhes">
             <p>{{avaliaResultado()}}</p>
         </div>
@@ -28,7 +28,7 @@
 <script>
 export default {
     name: "ResultViewer",
-    props: ['imc', 'peso', 'altura','pesoIdeal', 'genero'],
+    props: ['imc', 'peso', 'altura','pesoIdeal', 'genero','theme'],
     data () {
         return {
             image: '',
@@ -38,25 +38,25 @@ export default {
     },
     methods: {
         avaliaResultado() {
-            var texto = '';
+            let texto = '';
             if(this.$props.imc < 18.5) {
-                texto = 'seu IMC esta abaixo do peso para adultos de sua altura. mantenha uma alimentação saudável e '+
-                'pratique exercicios para alcançar seu peso ideal e evitar doenças.';
-                this.image = require('../assets/img/'+this.$props.genero+'Abaixo.svg');
+                texto = `Seu IMC esta abaixo do peso para adultos de sua altura. Mantenha uma alimentação saudável e
+                pratique exercicios para alcançar seu peso ideal e evitar doenças.`;                
+                this.image = require('../assets/img/'+ this.$props.theme + '/' +this.$props.genero+'Abaixo.svg');
                 this.resultado = 'abaixo do peso',
                 this.className = 'nao-saudavel'
             }
             else if(this.$props.imc >= 25) {
-                texto = 'Seu IMC indicou sobrepeso para adultos de sua altura. mantenha uma alimentação saudável e '+
-                'pratique exercicios para alcançar um peso ideal e evitar doenças.';
-                this.image = require('../assets/img/'+this.$props.genero+'Sobrepeso.svg');
+                texto = `Seu IMC indicou sobrepeso para adultos de sua altura. Mantenha uma alimentação saudável e
+                pratique exercicios para alcançar um peso ideal e evitar doenças.`;
+                this.image = require('../assets/img/'+ this.$props.theme + '/' +this.$props.genero+'Sobrepeso.svg');
                 this.resultado = 'sobrepeso'
                 this.className = 'nao-saudavel'
             }
             else {
-                texto = 'seu IMC esta dentre o recomendado para adultos de sua altura. mantenha uma alimentação saudável e' + 
-                'pratique exercicios para manter seu peso ideal e evitar doenças.';
-                this.image = require('../assets/img/'+this.$props.genero+'Recomendado.svg');
+                texto = `Parabéns! Seu IMC esta dentro do recomendado para adultos de sua altura. Mantenha uma alimentação saudável e 
+                pratique exercicios para se manter em seu peso ideal e evitar doenças.`;
+                this.image = require('../assets/img/'+ this.$props.theme + '/' +this.$props.genero+'Recomendado.svg');
                 this.resultado = 'peso saudável'
                 
 
@@ -64,6 +64,9 @@ export default {
             
             return texto;
         },
+    },
+    created: function() {
+        window.scrollTo(0, 0);
     }    
 }
 </script>
@@ -80,7 +83,7 @@ h1 {
 }
 h3 {
     text-align: center;
-    color: #08915C;
+    color: var(--title_and_button);
 }
 
 .imc-pointer {
@@ -113,7 +116,7 @@ h3 {
 }
 .detalhes {
     grid-column: 1/3;
-    color: #595C58;
+    color: var(--fields-text);
     margin: 30px 20px 25px 10px;
 }
 
